@@ -1,0 +1,151 @@
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%
+%  %NAME%    : Fichier .tex de base ou document maitre à compiler pour obtenir le rapport dedans il ne faut remplir que les champs indiqué par du texte commenté.
+%  %AUTHORs%  : Jean-Emmanuel Longueville
+%  %EMAIL%   : jean-emmanuel.longueville-chez.univ-poitiers.fr
+%	%Documents encodé en UTF8
+%  %VERSION% : 0.1 (10/01/2010)
+%
+%    Copyright (C) 
+%    
+%    This program is free software; you can redistribute it and/or
+%    modify it under the terms of the GNU General Public License
+%    as published by the Free Software Foundation; either version 2
+%    of the License, or (at your option) any later version.
+%    
+%    This program is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU General Public License for more details.
+%    
+%    You should have received a copy of the GNU General Public License
+%    along with this program; if not, write to the Free Software
+%    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+%
+%
+%    The GNU General Public License can be found on the website
+%    http://www.fsf.org
+%    
+%    Les travaux de traduction de la GPL peuvent être trouvés sur le
+%    site : http://www.april.org/gnu/gpl_french.html
+%
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+\documentclass{PSclasse}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%Préambule du document 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%Ptit prog annexe utilisé%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Changement automatique de répertoire pour les images eps pour une compilation LaTeX et Jpg png pour une compilation PDFLaTeX
+%Modification de la forme des titres pour perdre moins de place à cause de l'interligne 1.5
+	\usepackage{ifpdf}
+			\ifpdf
+				\graphicspath{{Illustrations/jpg/}{Illustrations/jpg/graph/}}
+					\else
+				\graphicspath{{Illustrations/eps/}{Illustrations/eps/graph/}}
+			\fi 
+%Pour les pdf
+		\usepackage[pdftex]{hyperref}
+%Redefinition de \caption pour avoir de petite légende ...
+	\renewcommand{\captionfont}{\footnotesize}%taille des légendes. necessite le paquet caption
+%Pour entrer la définition du titre et le reste.
+	\input{partie/info}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Définition de raccourci et abbréviation pour le code qui n'apparaisse pas dans le final.
+  \newcommand{\ret}{retours \`a terre }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Au cas ou vous compiler en pdfLaTeX
+		\docpdf
+%Pour pouvoir commenter facilement le manuscript.
+%\linenumbers
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%Début du document
+	\begin{document}
+%En tête de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{Investissement parental différentiel en fonction du sexe chez le Manchot royal}
+\fancyfoot[L]{\footnotesize{J-E Longueville}\newline \footnotesize{Rapport master 1}}
+\fancyfoot[C]{\thepage}
+
+%On insere la page de garde commenter par le signe pourcentage les pages que vous ne voulez pas voir apparaitre :
+%Page de garde comprennant toutes les informations necessaire ainsi que l'image que vous avez déclarer plus haut :
+	\pagedetitrefun
+%page de titre ne comprenant pas d'image juste deux traits horizontaux page assez sobre.
+%	\pagedetitre
+		
+%page blanche dos de la page de garde
+	\newpage
+		\thispagestyle{empty}
+		\null
+	\newpage
+	%%%%%%%%%%%%%%
+	%REMERCIEMENTS% 
+	%%%%%%%%%%%%%%
+	\merci
+	%%%%%%%%%%%%%%
+	%Sommaire% voir s'il est pas fait autrement par la classe
+	%%%%%%%%%%%%%%
+	\pagedesmatieres
+		%\newpage
+		%\thispagestyle{empty}
+		%\null
+		\newpage		
+		\input{partie/10-abrv}
+		%\thispagestyle{empty}
+		\newpage
+%Décommenter la ligne si dessous pour écrire le document en deux colones ou a placer ailleurs dans votre document.
+	%\twocolumn
+\begin{spacing}{1.5}
+	%%%%%%%%%%%%%%
+	%Introduction%
+	%%%%%%%%%%%%%%
+		\input{partie/4-intro}%
+	%%%%%%%%%%%%%%
+	%Matériel et méthode%
+	%%%%%%%%%%%%%%
+		\input{partie/5-materiel}%
+	%%%%%%%%%%%
+	%Résultats%
+	%%%%%%%%%%%
+		\input{partie/6-resultats}%
+	%%%%%%%%%%%
+	%Discution%
+	%%%%%%%%%%%
+		\input{partie/7-discussion}%
+
+\end{spacing}
+%Si vous êtes en deux colonnes la ligne si dessous permet de revenir en une colonne
+	%\onecolumn
+\newpage
+\singlespacing
+	%%%%%%%%%%
+	%Bibliography%
+	%%%%%%%%%%	
+	\bibliographie
+	\newpage
+	
+	%%%%%%%%%%%%
+	%Annexes%
+	%%%%%%%%%%%%
+	\section*{Annexes}\addcontentsline{toc}{section}{Annexes}
+	\appendix
+		\input{partie/8-annexe-1}%
+		\input{partie/9-annexe-2}%
+	\newpage
+	~
+	\thispagestyle{empty}
+	\newpage
+	\thispagestyle{empty}
+		~	
+	\vfill
+	\includegraphics[width=\linewidth, keepaspectratio=true]{dessin}
+\vfill	
+	~
+
+%Pages de quatrieme de couverture devant se trouver toujours à la fin du document.
+	\pagederesume
+%fin du document
+	\end{document}
